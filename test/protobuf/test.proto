@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package fixbug;
+
+//定义选项 , 表示生成service服务类和rpc方法描述 , 默认不生成
+option  cc_generic_services = true;
+
+message ResultCode
+{
+    int32   errcode = 1;
+    string  errmsg  = 2;
+}
+
+
+message  LoginRequest
+{
+    string      name = 1;
+    int32       pwd  = 2;
+}
+
+message  LonginResponse
+{
+    ResultCode  result = 1;
+    bool    success = 2;
+}
+
+
+message     GetFriendListRequest
+{
+    uint32   userid = 1;
+}
+
+message     User
+{
+    bytes   name =1;
+    uint32  age = 2;
+    enum Sex {
+        MAN  = 0;
+        WOMAN = 1;
+    }
+    Sex     sex = 3;
+}
+
+message   GetFriendListResponse
+{
+    ResultCode  result = 1;
+    repeated User  friendList = 2;
+}
+
+service UserServericeRpc
+{       
+    rpc Login (LoginRequest) returns (LonginResponse);
+    rpc GetFriendLists (GetFriendListRequest) returns (GetFriendListResponse);
+}

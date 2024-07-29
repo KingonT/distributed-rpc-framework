@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package fixbug;
+
+option cc_generic_services = true;
+
+message   ResaultCode
+{
+    int32     errcode = 1;
+    bytes     errmsg =2;
+}
+
+message  GetFriendsListRequest
+{
+    int32 userid = 1;
+}
+
+message  GetFriendsListResponse
+{
+    ResaultCode  result = 1;
+    repeated   bytes  friend = 2;
+}
